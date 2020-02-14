@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <p class="text-random"> Boo! This is a random text. </p>
+                <p class="text-random"> <?= __('Boo! This is a random text.') ?> </p>
             </div>
         </div>
         <div class="row">
@@ -28,7 +28,20 @@
                     </strong>
 
                     <div class="product-price">
-                        <?= /* @escapeNotVerified */ 'Multiplied Price: '  . $this->getPrice($product) ?>
+                        <?= /* @escapeNotVerified */  __('Multiplied Price: ')  . $this->getPrice($product) ?>
+                    </div>
+
+                    <?php $postParams = $block->getAddToCartPostParams($product); ?>
+                    <div class="product-actions">
+                        <form data-role="tocart-form" action="<?php /* @escapeNotVerified */ echo $postParams['action']; ?>" method="post">
+                            <input type="hidden" name="product" value="<?php /* @escapeNotVerified */ echo $postParams['data']['product']; ?>">
+                            <?php echo $block->getBlockHtml('formkey')?>
+                                <button type="submit"
+                                        title="<?php echo $block->escapeHtml(__('Add to Cart')); ?>"
+                                        class="action tocart primary">
+                                    <span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span>
+                                </button>
+                        </form>
                     </div>
                    
                 </div>
@@ -39,7 +52,7 @@
             <div class="col-xs-12">
                 <?php 
                 if ( $block->isCustomerLoggedIn() ): ?>
-                    <p class="text-logged-in"> Random text for logged in customers. </p>
+                    <p class="text-logged-in"> <?= __('Random text for logged in customers.') ?></p>
                 <?php endif; ?>
             </div>
         </div>

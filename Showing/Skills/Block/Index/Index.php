@@ -7,7 +7,8 @@ use \Magento\Catalog\Block\Product\Context;
 use \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
 use \Magento\Catalog\Helper\Image as HelperImage;
 use \Magento\Framework\Pricing\Helper\Data as HelperPrice;
-use \Magento\Customer\Model\Session as CustomerSession;;
+use \Magento\Customer\Model\Session as CustomerSession;
+use \Magento\Catalog\Block\Product\ListProduct;
 
 class Index extends Template
 {
@@ -31,12 +32,18 @@ class Index extends Template
      */
     protected $_customerSession;
 
+        /** 
+     * @var ListProduct
+     */
+    protected $_listProductBlock;
+
      /**
      * @param Context            $context
      * @param CollectionFactory  $productCollectionFactory
      * @param HelperImage        $imageHelper
      * @param HelperPrice        $priceHelper
      * @param CustomerSession    $customerSession
+     * @param ListProduct        $listProductBlock
      */
     public function __construct(
         Context $context,
@@ -44,12 +51,14 @@ class Index extends Template
         HelperImage $imageHelper,
         HelperPrice $priceHelper,
         CustomerSession $customerSession,
+        ListProduct $listProductBlock,
         array $data = []
     ) {
         $this->_productCollectionFactory    = $productCollectionFactory;   
         $this->_imageHelper                 = $imageHelper;
         $this->_priceHelper                 = $priceHelper;
         $this->_customerSession             = $customerSession;
+        $this->_listProductBlock            = $listProductBlock;
 
         parent::__construct($context, $data);
     }
@@ -96,6 +105,11 @@ class Index extends Template
     public function isCustomerLoggedIn()
     {
         return $this->_customerSession->isLoggedIn();
+    }
+
+    public function getAddToCartPostParams($product)
+    {
+        return $this->_listProductBlock->getAddToCartPostParams($product);
     }
 
 }

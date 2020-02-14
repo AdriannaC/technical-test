@@ -12,3 +12,14 @@
 .product-box img {
     height: 200px;
 }
+.tocart{
+    border-style: solid;
+    border-color: #ffed00;
+    border-radius: 15px;
+    color: #000000;
+    background-color: #ffed00;
+    margin-top: 10px;
+}
+.tocart span{
+    font-size: 15px;
+}
