@@ -1,0 +1,47 @@
+
+<?php $_helper = $this->helper('Magento\Catalog\Helper\Output'); ?>
+
+<section class="products-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <p class="text-random"> Boo! This is a random text. </p>
+            </div>
+        </div>
+        <div class="row">
+            <?php 
+            $productCollection = $block->getProductCollection(); 
+            foreach ($productCollection as $product): 
+                $imgUrl = $this->getItemImage($product); ?>
+            <div class="col-md-3">
+                <div class="product-info">
+                
+                    <div class="product-box">
+                        <img src="<?= $imgUrl; ?>" alt="<?= $product->getName() ?>"/>
+                    </div>
+
+                    <strong class="product-name">
+                        <a class="product-link"
+                            href="<?= /* @escapeNotVerified */ $product->getProductUrl() ?>">
+                            <?= /* @escapeNotVerified */ $_helper->productAttribute($product, $product->getName(), 'name') ?>
+                        </a>
+                    </strong>
+
+                    <div class="product-price">
+                        <?= /* @escapeNotVerified */ 'Multiplied Price: '  . $this->getPrice($product) ?>
+                    </div>
+                   
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <?php 
+                if ( $block->isCustomerLoggedIn() ): ?>
+                    <p class="text-logged-in"> Random text for logged in customers. </p>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</section>

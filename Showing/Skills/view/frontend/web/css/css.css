@@ -1,0 +1,14 @@
+.text-random{
+    font-size: 18px;
+    color: red;
+    padding-top: 20px;
+}
+.text-logged-in{
+    font-size: 20px;
+    color: green;
+    padding: 20px;
+    text-align: center;
+}
+.product-box img {
+    height: 200px;
+}
